@@ -44,11 +44,18 @@ function GenerateTileSets(atlas, quads) --custom function for this game, not ver
     local tableCounter = 0
 
     for setsY = 1, 4 do
-        tilesets[setsY] = {}
+        tilesets[setsY] = {} --the tiles themselves
         local tileCounter = 1
-        for y = 1, 4 do
+        for y = 1, 3 do
             for x = 1, 9 do
                 tilesets[setsY][tileCounter] = quads[(setsY - 1) * 22 * 3 + (y-1) * 22 + x]
+                tileCounter = tileCounter + 1
+            end
+        end
+
+        for y = 1, 2 do --bushes
+            for x = 1, 3 do
+                tilesets[setsY][tileCounter] = quads[(setsY - 1) * 22 * 2 + (y-1) * 22 + (x + 9)]
                 tileCounter = tileCounter + 1
             end
         end

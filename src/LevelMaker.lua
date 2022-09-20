@@ -15,9 +15,13 @@ function LevelMaker.generate(width, height)
         local tileID = TILE_ID_EMPTY
         local spawnColumn = math.random(5) == 1 and true or false
         local spawnPit = math.random(5) == 1 and true or false
+        local spawnBush = math.random(10) == 1 and true or false
 
         if spawnColumn then
             for y = 1, 4 do
+                if spawnBush and y == 4 then
+                    tileID = math.random(28, 33)
+                end
             table.insert(tiles[y], Tile(x, y, tileID, tileset))
             end
 
@@ -39,8 +43,11 @@ function LevelMaker.generate(width, height)
         else
 
             for y = 1, 6 do
-            table.insert(tiles[y],
-                Tile(x, y, tileID, tileset)) 
+                if spawnBush and y == 6 then
+                    tileID = math.random(28, 33)
+                end
+                table.insert(tiles[y],
+                    Tile(x, y, tileID, tileset)) 
             end
 
             tileID = MID
