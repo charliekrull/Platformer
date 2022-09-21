@@ -15,6 +15,7 @@ require 'src/Tile'
 require 'src/TileMap'
 require 'src/Walker'
 require 'src/LevelMaker'
+require 'src/GameObject'
 
 require 'src/states/BaseState'
 require 'src/states/entity/player/PlayerFallState'

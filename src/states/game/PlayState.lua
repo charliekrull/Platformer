@@ -35,6 +35,7 @@ function PlayState:update(dt)
 
     --remove nils from pickups etc
     self.level:clear()
+    
     self.player:update(dt)
     self.level:update(dt)
     self:updateCamera()

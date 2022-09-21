@@ -52,6 +52,9 @@ function PlayerFallState:update(dt)
         self.player.direction = 'right'
         self.player.x = self.player.x + PLAYER_WALK_SPEED * dt
         self.player:checkRightCollisions(dt)
+
+    else
+        self.player:checkObjectCollisions()
         
     end
 

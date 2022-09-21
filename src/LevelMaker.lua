@@ -42,6 +42,23 @@ function LevelMaker.generate(width, height)
         
         else
 
+            if math.random(10) == 1 then -- chance to spawn a coin
+                table.insert(objects, GameObject{
+                    x = (x - 1) * TILE_SIZE, 
+                    y = 4 * TILE_SIZE,
+                    width = 64,
+                    height = 64,
+                    frame = YELLOW_COIN,
+                    collidable = true,
+                    consumable = true,
+                    solid = false,
+                    onConsume = function(player)
+                        player.score = player.score + 100
+                    end
+
+                })    
+            end
+
             for y = 1, 6 do
                 if spawnBush and y == 6 then
                     tileID = math.random(28, 33)
@@ -57,10 +74,12 @@ function LevelMaker.generate(width, height)
                     tileID = UNDERGROUND
                 end
                 table.insert(tiles[y],
-                Tile(x, y, tileID, tileset))
+                    Tile(x, y, tileID, tileset))
             end
 
         end
+
+        
 
 
 
