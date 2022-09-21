@@ -24,12 +24,20 @@ require 'src/states/entity/player/PlayerJumpState'
 require 'src/states/entity/player/PlayerWalkState'
 
 require 'src/states/game/PlayState'
+require 'src/states/game/StartState'
 
 --all the sound files
 gSounds = {}
 
+--all the fonts in the game 
+gFonts = {['large'] = love.graphics.newFont('fonts/Trigram.ttf', 100),
+        ['medium'] = love.graphics.newFont('fonts/Trigram.ttf', 50),
+        ['small'] = love.graphics.newFont('fonts/Trigram.ttf', 25)}
+
 --the raw images we'll be using
 gTextures = {['tiles'] = love.graphics.newImage('graphics/Tilesheet/tilesheet_complete.png'),
+    ['backgrounds'] = {['tiled'] = love.graphics.newImage('graphics/Backgrounds/set2_tiles.png')},
+
     ['playerBlue'] = {['idle'] = {love.graphics.newImage('graphics/PNG/Players/Player Blue/playerBlue_stand.png')},
 
         ['walk'] = {love.graphics.newImage('graphics/PNG/Players/Player Blue/playerBlue_walk1.png'),

@@ -50,12 +50,18 @@ function PlayState:update(dt)
 end
 
 function PlayState:render()
+    love.graphics.push()
     love.graphics.translate(-math.floor(self.camX), -math.floor(self.camY))
 
     love.graphics.clear(0, 0, 1)
 
     self.level:render()
     self.player:render()
+
+    love.graphics.pop()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.setFont(gFonts['small'])
+    love.graphics.print('Score: '.. self.player.score, 0, 0)
 end
 
 function PlayState:updateCamera()

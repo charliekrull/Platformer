@@ -41,6 +41,7 @@ function PlayerFallState:update(dt)
 
     elseif self.player.y > VIRTUAL_HEIGHT then
         --die
+        gStateMachine:change('start')
 
     elseif love.keyboard.isDown('left') then
         self.player.direction = 'left'
