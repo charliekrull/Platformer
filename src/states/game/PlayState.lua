@@ -27,6 +27,8 @@ function PlayState:init()
         level = self.level
     })
 
+    self:spawnEnemies()
+
     self.player:changeState('fall')
 end
 
@@ -69,5 +71,42 @@ function PlayState:updateCamera()
     self.camX = math.max(0,
     math.min(TILE_SIZE * self.tileMap.width - VIRTUAL_WIDTH,
     self.player.x - (VIRTUAL_WIDTH / 2 - 8)))
+
+end
+
+function PlayState:spawnEnemies()
+    for x = 1, self.tileMap.width do
+        local groundFound = false
+        for y = 1, self.tileMap.height do
+            if not groundFound then
+                if self.tileMap.tiles[y][x].id == MID or self.tileMap.tiles[y][x] == UNDERGROUND then
+                    groundFound = true
+
+                    if math.random(20) == 1 then
+                        
+                        local walker 
+                        walker = Walker{
+                            x = (x - 1) * TILE_SIZE,
+                            y = (y - 2) * TILE_SIZE,
+                            frameSet = 'walker',
+                            width = 32,
+                            height = 44,
+                            stateMachine = StateMachine{
+                                ['idle'] = function() return WalkerIdleState(self.tileMap, self.player, walker) end,
+                                ['move'] = function() return WalkerMoveState(self.tileMap, self.player, walker) end
+                            }
+                        }
+
+                        walker:changeState('idle', {
+                            waitPeriod = math.random(3)
+                        })
+
+                        table.insert(self.level.entities, walker)
+                    end
+                    
+                end
+            end
+        end
+    end
 
 end

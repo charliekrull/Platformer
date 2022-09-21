@@ -9,6 +9,8 @@ VIRTUAL_HEIGHT = 720
 PLAYER_WALK_SPEED = 240 --pixels per second
 PLAYER_JUMP_SPEED = -540
 
+WALKER_MOVE_SPEED = 180
+
 --size of our tiles in pixels (64 wide, 64 tall)
 TILE_SIZE = 64
 

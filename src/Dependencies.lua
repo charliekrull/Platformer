@@ -23,6 +23,9 @@ require 'src/states/entity/player/PlayerIdleState'
 require 'src/states/entity/player/PlayerJumpState'
 require 'src/states/entity/player/PlayerWalkState'
 
+require 'src/states/entity/enemies/WalkerIdleState'
+require 'src/states/entity/enemies/WalkerMoveState'
+
 require 'src/states/game/PlayState'
 require 'src/states/game/StartState'
 
@@ -53,8 +56,8 @@ gTextures = {['tiles'] = love.graphics.newImage('graphics/Tilesheet/tilesheet_co
         ['fall'] = {love.graphics.newImage('graphics/PNG/Players/Player Blue/playerBlue_fall.png')}
     },
 
-    ['walker'] = {['stand'] = {love.graphics.newImage('graphics/PNG/Enemies/enemyWalking_1.png')},
-        ['walk'] = {love.graphics.newImage('graphics/PNG/Enemies/enemyWalking_1.png'),
+    ['walker'] = {['idle'] = {love.graphics.newImage('graphics/PNG/Enemies/enemyWalking_1.png')},
+        ['move'] = {love.graphics.newImage('graphics/PNG/Enemies/enemyWalking_1.png'),
         love.graphics.newImage('graphics/PNG/Enemies/enemyWalking_2.png'),
         love.graphics.newImage('graphics/PNG/Enemies/enemyWalking_3.png')}
     }
