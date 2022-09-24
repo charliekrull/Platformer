@@ -51,6 +51,7 @@ function PlayerWalkState:update(dt)
     for k, entity in pairs(self.player.level.entities) do
         if entity:collides(self.player) then
             --playe a sound and die
+            gStateMachine:change('start')
         end
     end
 

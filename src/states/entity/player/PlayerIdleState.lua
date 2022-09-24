@@ -31,6 +31,7 @@ function PlayerIdleState:update(dt)
             --[[
                 play a sound and die
             ]]
+            gStateMachine:change('start')
         end
     end
 end

@@ -59,6 +59,7 @@ function PlayerJumpState:update(dt)
     --check if we've collided with entities and die if so
     for k, entity in pairs(self.player.level.entities) do
         if entity:collides(self.player) then
+            gStateMachine:change('start')
             
         end
     end
