@@ -53,6 +53,8 @@ function LevelMaker.generate(width, height)
                     consumable = true,
                     solid = false,
                     onConsume = function(player)
+                        gSounds['coin']:stop()
+                        gSounds['coin']:play()
                         player.score = player.score + 100
                     end
 

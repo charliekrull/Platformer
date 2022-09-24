@@ -31,7 +31,12 @@ require 'src/states/game/PlayState'
 require 'src/states/game/StartState'
 
 --all the sound files
-gSounds = {}
+gSounds = {['jump'] = love.audio.newSource("sounds/Jump.wav", 'static'),
+        ['coin'] = love.audio.newSource('sounds/Pickup_Coin.wav', 'static'),
+        ['player-hit'] = love.audio.newSource('sounds/Player_Hit.wav', 'static'),
+        ['enemy-hit'] = love.audio.newSource('sounds/Enemy_Hit.wav', 'static'),
+        ['start'] = love.audio.newSource('sounds/Start.wav', 'static')
+        }
 
 --all the fonts in the game 
 gFonts = {['large'] = love.graphics.newFont('fonts/Trigram.ttf', 100),

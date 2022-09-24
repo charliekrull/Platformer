@@ -14,7 +14,9 @@ end
 
 function PlayerJumpState:enter(params)
     self.player.currentState = 'jump'
-    self.player.dy = PLAYER_JUMP_SPEED
+    gSounds['jump']:stop()
+    gSounds['jump']:play()
+    self.player.dy = params.dy
 end
 
 function PlayerJumpState:update(dt)
@@ -59,6 +61,8 @@ function PlayerJumpState:update(dt)
     --check if we've collided with entities and die if so
     for k, entity in pairs(self.player.level.entities) do
         if entity:collides(self.player) then
+            gSounds['player-hit']:stop()
+            gSounds['player-hit']:play()
             gStateMachine:change('start')
             
         end

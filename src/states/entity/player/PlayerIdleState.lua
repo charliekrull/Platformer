@@ -23,7 +23,7 @@ function PlayerIdleState:update(dt)
     end
 
     if love.keyboard.wasPressed('space') then
-        self.player:changeState('jump')
+        self.player:changeState('jump', {dy = PLAYER_JUMP_SPEED})
     end
 
     for k, entity in pairs(self.player.level.entities) do --check for collisions with entities
@@ -31,6 +31,8 @@ function PlayerIdleState:update(dt)
             --[[
                 play a sound and die
             ]]
+            gSounds['player-hit']:stop()
+            gSounds['player-hit']:play()
             gStateMachine:change('start')
         end
     end
