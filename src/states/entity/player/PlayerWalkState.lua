@@ -58,6 +58,8 @@ function PlayerWalkState:update(dt)
     end
 
     if love.keyboard.wasPressed('space') then
+        gSounds['jump']:stop()
+        gSounds['jump']:play()
         self.player:changeState('jump', {dy = PLAYER_JUMP_SPEED})
     end
 

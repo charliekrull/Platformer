@@ -14,8 +14,6 @@ end
 
 function PlayerJumpState:enter(params)
     self.player.currentState = 'jump'
-    gSounds['jump']:stop()
-    gSounds['jump']:play()
     self.player.dy = params.dy
 end
 
