@@ -8,11 +8,13 @@ function love.load()
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT)
 
 
-   gStateMachine = StateMachine{
-    ['start'] = function() return StartState() end,
-    ['play'] = function() return PlayState() end
-   }
-   gStateMachine:change('start')
+    gStateMachine = StateMachine{
+        ['start'] = function() return StartState() end,
+        ['play'] = function() return PlayState() end
+    }
+    gStateMachine:change('start')
+    gSounds['music']:setLooping(true)
+    gSounds['music']:play()
 
     love.keyboard.keysPressed = {}
 
