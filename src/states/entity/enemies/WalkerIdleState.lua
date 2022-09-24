@@ -20,7 +20,14 @@ function WalkerIdleState:enter(params)
 end
 
 function WalkerIdleState:update(dt)
-    if self.waitTimer < self.waitPeriod then
+    local tileBottomLeft = self.tilemap:pointToTile(self.walker.x, self.walker.y + self.walker.height)
+    local tileBottomRight = self.tilemap:pointToTile(self.walker.x + self.walker.width, self.walker.y + self.walker.height)
+
+    if (tileBottomLeft and tileBottomRight) and (not tileBottomLeft:collidable() and not tileBottomRight:collidable()) then
+        self.walker:changeState('fall')
+
+
+    elseif self.waitTimer < self.waitPeriod then
         self.waitTimer = self.waitTimer + dt
 
     else

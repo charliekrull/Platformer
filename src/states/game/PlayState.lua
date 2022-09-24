@@ -93,7 +93,8 @@ function PlayState:spawnEnemies()
                             height = 44,
                             stateMachine = StateMachine{
                                 ['idle'] = function() return WalkerIdleState(self.tileMap, self.player, walker) end,
-                                ['move'] = function() return WalkerMoveState(self.tileMap, self.player, walker) end
+                                ['move'] = function() return WalkerMoveState(self.tileMap, self.player, walker) end,
+                                ['fall'] = function() return WalkerFallState(self.tileMap, walker, self.gravityAmount) end
                             }
                         }
 

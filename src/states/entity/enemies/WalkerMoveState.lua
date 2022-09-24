@@ -6,7 +6,7 @@ function WalkerMoveState:init(tilemap, player, walker)
     self.walker = walker
     
     self.animation = Animation{
-        frames = {1, 2, 3, 2},
+        frames = {1, 2},
         interval = 0.1
     }
 
