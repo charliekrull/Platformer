@@ -20,12 +20,41 @@ function PlayState:init()
             ['jump'] = function() return PlayerJumpState(self.player, self.gravityAmount) end,
             ['fall'] = function() return PlayerFallState(self.player, self.gravityAmount) end
         },
+
+        
     
 
         --get references to tilemap and level
         map = self.tileMap,
         level = self.level
+
+       
+
+        
     })
+
+    --check for land to make sure we don't spawn over a pit
+    self.landFound = false
+    for x = 0, (self.tileMap.width - 1) * TILE_SIZE, TILE_SIZE do
+        for y = 0, (self.tileMap.height - 1) * TILE_SIZE, TILE_SIZE do
+            local currentTile = self.tileMap:pointToTile(x, y)
+            if currentTile:collidable() then
+                self.landFound = true
+                break
+            end
+        end
+
+        if self.landFound then
+            break
+
+        else
+            self.player.x = self.player.x + TILE_SIZE
+        end
+       
+    end
+    
+    
+
 
     self:spawnEnemies()
 
@@ -111,3 +140,4 @@ function PlayState:spawnEnemies()
     end
 
 end
+

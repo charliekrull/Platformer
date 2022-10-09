@@ -48,7 +48,19 @@ gFonts = {['large'] = love.graphics.newFont('fonts/Trigram.ttf', 100),
 
 --the raw images we'll be using
 gTextures = {['tiles'] = love.graphics.newImage('graphics/Tilesheet/tilesheet_complete.png'),
-    ['backgrounds'] = {['tiled'] = love.graphics.newImage('graphics/Backgrounds/set2_tiles.png')},
+    ['backgrounds'] = {love.graphics.newImage('graphics/Backgrounds/set1_background.png'),
+    love.graphics.newImage('graphics/Backgrounds/set1_hills.png'),
+    love.graphics.newImage('graphics/Backgrounds/set1_tiles.png'),
+    love.graphics.newImage('graphics/Backgrounds/set2_background.png'),
+    love.graphics.newImage('graphics/Backgrounds/set2_hills.png'),
+    love.graphics.newImage('graphics/Backgrounds/set2_tiles.png'),
+    love.graphics.newImage('graphics/Backgrounds/set3_background.png'),
+    love.graphics.newImage('graphics/Backgrounds/set3_hills.png'),
+    love.graphics.newImage('graphics/Backgrounds/set3_tiles.png'),
+    love.graphics.newImage('graphics/Backgrounds/set4_background.png'),
+    love.graphics.newImage('graphics/Backgrounds/set4_hills.png'),
+    love.graphics.newImage('graphics/Backgrounds/set4_tiles.png')
+            },
 
     ['playerBlue'] = {['idle'] = {love.graphics.newImage('graphics/PNG/Players/Player Blue/playerBlue_stand.png')},
 
