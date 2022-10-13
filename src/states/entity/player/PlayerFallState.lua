@@ -62,6 +62,17 @@ function PlayerFallState:update(dt)
     end
 
     --check for object collisions
+    for k, object in pairs(self.player.level.objects) do
+        if object:collides(self.player) then
+            if object.solid then
+                self.player.y = object.y - self.player.height
+                self.player.dy = 0
+
+                self.player:changeState('idle')
+            end
+        end
+    end
+
 
 
     --check for entity collisions and kill THEM if necessary

@@ -29,9 +29,12 @@ function PlayerWalkState:update(dt)
         local tileBottomRight = self.player.map:pointToTile(self.player.x + self.player.width - 1, self.player.y + self.player.height)
 
         --temporarily shift player down a pixel to test for game objects
+        self.player.y = self.player.y + 1
+        local collidedObjects = self.player:checkObjectCollisions()
+        self.player.y = self.player.y - 1
 
         --if no tiles underneath us, fall
-        if (tileBottomLeft and tileBottomRight) and (not tileBottomLeft:collidable() and not tileBottomRight:collidable()) then
+        if #collidedObjects == 0 and (tileBottomLeft and tileBottomRight) and (not tileBottomLeft:collidable() and not tileBottomRight:collidable()) then
             self.player.dy = 0
             self.player:changeState('fall')
 

@@ -61,6 +61,21 @@ function LevelMaker.generate(width, height)
                 })    
             end
 
+            if math.random(10) == 1 then --chance to spawn a box
+                table.insert(objects, GameObject{
+                    x = (x - 1) * TILE_SIZE,
+                    y = 3 * TILE_SIZE,
+                    width = 64,
+                    height = 64,
+                    frame = LIGHT_BLOCK,
+                    collidable = false,
+                    consumable = false,
+                    solid = true,
+                    hit = false
+                    
+                })
+            end
+
             for y = 1, 6 do
                 if spawnBush and y == 6 then
                     tileID = math.random(28, 33)

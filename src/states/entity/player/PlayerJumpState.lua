@@ -36,7 +36,7 @@ function PlayerJumpState:update(dt)
 
     if (tileTopLeft and tileTopRight) and (tileTopLeft:collidable() or tileTopRight:collidable()) then
         self.player.dy = 0
-        self.player:changeState('falling')
+        self.player:changeState('fall')
 
     elseif love.keyboard.isDown('left') then
         self.player.direction = 'left'
@@ -54,6 +54,26 @@ function PlayerJumpState:update(dt)
     end
 
     --check here if we've hit any game objects
+    for k, object in pairs(self.player.level.objects) do
+        if object:collides(self.player) then
+            if object.collidable then
+                object.onCollide(object)
+
+            elseif object.consumable then
+                object.onConsume(self.player)
+                table.remove(self.player.level.objects, k)
+            
+            end
+
+            if object.solid then
+
+                self.player.y = object.y + object.height
+                self.player.dy = 0
+                self.player:changeState('fall')
+            end
+
+        end
+    end
 
 
     --check if we've collided with entities and die if so
