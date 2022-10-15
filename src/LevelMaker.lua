@@ -41,13 +41,14 @@ function LevelMaker.generate(width, height)
         
         
         else
+            local objHeight = math.random(3, 4)
 
             if math.random(10) == 1 then -- chance to spawn a coin
                 table.insert(objects, GameObject{
                     x = (x - 1) * TILE_SIZE, 
-                    y = 4 * TILE_SIZE,
-                    width = 64,
-                    height = 64,
+                    y = (objHeight - 1) * TILE_SIZE,
+                    width = 16,
+                    height = 16,
                     frame = YELLOW_COIN,
                     collidable = true,
                     consumable = true,
@@ -59,19 +60,44 @@ function LevelMaker.generate(width, height)
                     end
 
                 })    
-            end
+            
 
-            if math.random(10) == 1 then --chance to spawn a box
+            elseif math.random(10) == 2 then --chance to spawn a box
                 table.insert(objects, GameObject{
                     x = (x - 1) * TILE_SIZE,
-                    y = 3 * TILE_SIZE,
+                    y = (objHeight - 1) * TILE_SIZE,
                     width = 64,
                     height = 64,
                     frame = LIGHT_BLOCK,
-                    collidable = false,
+                    collidable = true,
                     consumable = false,
                     solid = true,
-                    hit = false
+                    hit = false,
+                    
+                    onCollide = function(obj)
+                        if not obj.hit then
+                            obj.hit = true
+                            local coin = GameObject{
+                                x = (x - 1) * TILE_SIZE,
+                                y = (objHeight - 1) * TILE_SIZE,
+                                width = 16,
+                                height = 16,
+                                frame = YELLOW_COIN,
+                                collidable = false,
+                                consumable = true,
+                                solid = false,
+                                onConsume = function(player)
+                                    gSounds['coin']:stop()
+                                    gSounds['coin']:play()
+                                    player.score = player.score + 100
+                                end
+                            }
+
+                            Timer.tween(0.1, {[coin] = {y = (objHeight - 2) * TILE_SIZE}})
+
+                            table.insert(objects, coin)
+                        end
+                    end
                     
                 })
             end

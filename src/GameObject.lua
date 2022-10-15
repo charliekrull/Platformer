@@ -11,12 +11,12 @@ function GameObject:init(def)
     self.height = def.height
     self.frame = def.frame --the image of the complete texture to use
 
-    self.collidable = def.collidable
-    self.consumable = def.consumable
-    self.solid = def.solid
-    self.onCollide = def.onCollide
+    self.collidable = def.collidable --does something when collided with
+    self.consumable = def.consumable --does something and dissappears when collided with
+    self.solid = def.solid --will cause the player to stop moving, can walk on it, etc
+    self.onCollide = def.onCollide 
     self.onConsume = def.onConsume
-    self.hit = def.hit
+    self.hit = def.hit --have we hit it yet?
     
 end
 
