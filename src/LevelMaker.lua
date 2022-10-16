@@ -47,8 +47,8 @@ function LevelMaker.generate(width, height)
                 table.insert(objects, GameObject{
                     x = (x - 1) * TILE_SIZE, 
                     y = (objHeight - 1) * TILE_SIZE,
-                    width = 16,
-                    height = 16,
+                    width = 64,
+                    height = 64,
                     frame = YELLOW_COIN,
                     collidable = true,
                     consumable = true,
@@ -76,12 +76,14 @@ function LevelMaker.generate(width, height)
                     
                     onCollide = function(obj)
                         if not obj.hit then
+                            gSounds['coin-appears']:stop()
+                            gSounds['coin-appears']:play()
                             obj.hit = true
                             local coin = GameObject{
                                 x = (x - 1) * TILE_SIZE,
-                                y = (objHeight - 1) * TILE_SIZE,
-                                width = 16,
-                                height = 16,
+                                y = (objHeight - 1) * TILE_SIZE - 1, -- -1 pixel so we don't immediately collide with it
+                                width = 64,
+                                height = 64,
                                 frame = YELLOW_COIN,
                                 collidable = false,
                                 consumable = true,

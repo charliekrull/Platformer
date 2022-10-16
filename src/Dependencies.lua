@@ -36,9 +36,10 @@ gSounds = {['jump'] = love.audio.newSource("sounds/Jump.wav", 'static'),
         ['player-hit'] = love.audio.newSource('sounds/Player_Hit.wav', 'static'),
         ['enemy-hit'] = love.audio.newSource('sounds/Enemy_Hit.wav', 'static'),
         ['start'] = love.audio.newSource('sounds/Start.wav', 'static'),
-        ['music'] = love.audio.newSource('sounds/Fuzzball Parade.mp3', 'stream') --[["Fuzzball Parade" Kevin MacLeod (incompetech.com)
+        ['music'] = love.audio.newSource('sounds/Fuzzball Parade.mp3', 'stream'), --[["Fuzzball Parade" Kevin MacLeod (incompetech.com)
         Licensed under Creative Commons: By Attribution 4.0 License
         http://creativecommons.org/licenses/by/4.0/]]
+        ['coin-appears'] = love.audio.newSource('sounds/CoinAppears.wav', 'static')
         }
 
 --all the fonts in the game 
