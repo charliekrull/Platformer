@@ -79,7 +79,7 @@ function PlayerFallState:update(dt)
     for k, entity in pairs(self.player.level.entities) do
         if entity:collides(self.player) then
             self.player.score = self.player.score + 100
-            self.player:changeState('jump', {dy = -200})
+            self.player:changeState('jump', {dy = -300})
             gSounds['enemy-hit']:stop()
             gSounds['enemy-hit']:play()
             table.remove(self.player.level.entities, k)

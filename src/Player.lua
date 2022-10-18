@@ -59,7 +59,7 @@ end
 
 function Player:checkRightCollisions(dt)
     local tileTopRight = self.map:pointToTile(self.x + self.width - 1, self.y + 1)
-    local tileBottomRight = self.map:pointToTile(self.x + self.width - 1, self.y + self.height -1)
+    local tileBottomRight = self.map:pointToTile(self.x + self.width - 1, self.y + self.height - 1)
 
     if (tileTopRight and tileBottomRight) and (tileTopRight:collidable() or tileBottomRight:collidable()) then
         self.x = (tileTopRight.x - 1) * TILE_SIZE - self.width

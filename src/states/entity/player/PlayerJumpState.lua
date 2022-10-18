@@ -29,8 +29,8 @@ function PlayerJumpState:update(dt)
 
     --look at the two tiles above the head to check for collisions; 3 pixels of leeway to get through gaps
 
-    local tileTopLeft = self.player.map:pointToTile(self.player.x + 3, self.player.y)
-    local tileTopRight = self.player.map:pointToTile(self.player.x + self.player.width - 3, self.player.y)
+    local tileTopLeft = self.player.map:pointToTile(self.player.x + 1, self.player.y)
+    local tileTopRight = self.player.map:pointToTile(self.player.x + self.player.width - 1, self.player.y)
 
     --if there is a collision on top, fall
 
@@ -56,21 +56,19 @@ function PlayerJumpState:update(dt)
     --check here if we've hit any game objects
     for k, object in pairs(self.player.level.objects) do
         if object:collides(self.player) then
-            if object.collidable then
+            if object.solid then
                 object.onCollide(object)
+                self.player.y = object.y + object.height
+                self.player.dy = 0
+                self.player:changeState('fall')
 
             elseif object.consumable then
                 object.onConsume(self.player)
                 table.remove(self.player.level.objects, k)
             
+            
             end
 
-            if object.solid then
-
-                self.player.y = object.y + object.height
-                self.player.dy = 0
-                self.player:changeState('fall')
-            end
 
         end
     end

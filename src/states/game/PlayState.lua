@@ -8,7 +8,7 @@ function PlayState:init()
     self.tileMap = self.level.tileMap
 
 
-    self.gravityAmount = 6
+    self.gravityAmount = 10
     
     self.player = Player({
         x = 0, y = 0,
@@ -111,7 +111,7 @@ function PlayState:spawnEnemies()
                 if self.tileMap.tiles[y][x].id == MID or self.tileMap.tiles[y][x] == UNDERGROUND then
                     groundFound = true
 
-                    if math.random(20) == 1 then
+                    if math.random(20) == 1 then --spawn an enemy
                         
                         local walker 
                         walker = Walker{
@@ -131,7 +131,7 @@ function PlayState:spawnEnemies()
                             waitPeriod = math.random(3)
                         })
 
-                        table.insert(self.level.entities, walker)
+                        table.insert(self.level.entities, walker)  
                     end
                     
                 end
