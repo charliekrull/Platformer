@@ -7,6 +7,9 @@ function LevelMaker.generate(width, height)
 
     local tileset = math.random(4)
 
+    local keySpawned = false
+    local lockSpawned = false
+
     for x = 1, height do
         table.insert(tiles, {})
     end
@@ -102,6 +105,56 @@ function LevelMaker.generate(width, height)
                     end
                     
                 })
+
+            elseif math.random(2) == 1 and not keySpawned then
+                keySpawned = true
+                local key = GameObject{
+                    x = (x - 1) * TILE_SIZE,
+                    y = (objHeight - 1) * TILE_SIZE,
+                    width = 64,
+                    height = 64,
+                    frame = GREEN_KEY,
+                    consumable = true,
+                    onConsume = function(player)
+                        for k, obj in pairs(player.level.objects) do
+                            if obj.frame == LOCK_BLOCK then
+                                local goal = GameObject{
+                                    x = obj.x,
+                                    y = obj.y,
+                                    width = 64,
+                                    height = 64,
+                                    frame = GREEN_FLAG_RAISED,
+                                    consumable = true,
+                                    solid = false,
+                                    
+                                    onConsume = function(player)
+                                        gStateMachine:change('play', {levelNum = player.levelNum + 1, score = player.score})
+                                    end
+                                }
+                                table.remove(player.level.objects, k)
+                                table.insert(objects, goal)
+                            end
+                        end
+                    
+                    end
+                }
+                table.insert(objects, key)    
+            
+            end
+
+            if width - x < 6 and not lockSpawned then
+                lockSpawned = true
+                local lock = GameObject{
+                    x = (x - 1) * TILE_SIZE,
+                    y = 5 * TILE_SIZE,
+                    width = 64,
+                    height = 64,
+                    frame = LOCK_BLOCK,
+                    solid = true
+                    
+                }
+
+                table.insert(objects, lock)
             end
 
             for y = 1, 6 do
@@ -129,6 +182,8 @@ function LevelMaker.generate(width, height)
 
 
     end
+
+
 
     local map = TileMap(width, height)
     map.tiles = tiles

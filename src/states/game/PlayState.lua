@@ -1,18 +1,20 @@
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init()
+function PlayState:enter(params)
+    
     self.camX = 0
     self.camY = 0
     --generate level
-    self.level = LevelMaker.generate(100, 12)
+    self.level = LevelMaker.generate(90 + (10 * params.levelNum), 12)
     self.tileMap = self.level.tileMap
-
 
     self.gravityAmount = 10
     
     self.player = Player({
         x = 0, y = 0,
         width = 45, height = 54,
+        score = params.score,
+        levelNum = params.levelNum,
         frameSet = 'playerBlue',
         stateMachine = StateMachine{
             ['idle'] = function() return PlayerIdleState(self.player) end,
@@ -26,12 +28,14 @@ function PlayState:init()
 
         --get references to tilemap and level
         map = self.tileMap,
-        level = self.level
+        level = self.level,
+
 
        
 
         
     })
+    
 
     --check for land to make sure we don't spawn over a pit
     self.landFound = false
@@ -93,6 +97,7 @@ function PlayState:render()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(gFonts['small'])
     love.graphics.print('Score: '.. self.player.score, 0, 0)
+    love.graphics.printf('Level: '..self.player.levelNum, 0, 0, WINDOW_WIDTH, 'center')
 end
 
 function PlayState:updateCamera()

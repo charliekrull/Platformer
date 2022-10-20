@@ -12,7 +12,7 @@ function StartState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gSounds['start']:stop()
         gSounds['start']:play()
-        gStateMachine:change('play')
+        gStateMachine:change('play', {levelNum = 1, score = 0})
     end
 
 end
